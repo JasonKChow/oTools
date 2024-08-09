@@ -32,6 +32,9 @@ corMatrixPlot(
 
 \item{completedOnly}{A boolean indicating whether to only use complete cases}
 }
+\value{
+A ggplot object
+}
 \description{
 Create a pairs plot for a set of measures. The diagonal typically includes
 the reliabilities and a KDE of the distribution of scores across

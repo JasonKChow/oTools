@@ -9,16 +9,10 @@ vignette: >
 # oTools
 Here is a brief overview of the package.
 
-# Installation
-This is how you install this package. 
-```{r, eval = FALSE}
-devtools::install_github("OPLabVanderbilt/oTools")
-```
-
 # Setup and load some example data
 ```{r setup, warning=FALSE}
-suppressMessages(devtools::load_all())
-suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(oTools))
+suppressPackageStartupMessages(library(dplyr))
 
 
 # Load some data

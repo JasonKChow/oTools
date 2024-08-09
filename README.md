@@ -10,3 +10,11 @@ overview of data.
 ```r
 devtools::install_github("OPLabVanderbilt/oTools")
 ```
+
+# Usage
+
+See vignette for example usage.
+
+```r
+vignette("example", package = "oTools")
+```

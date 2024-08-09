@@ -7,7 +7,7 @@ Description: A set of functions useful for analyzing o tests and other similar
     tests created by OPLab (https://github.com/OPLabVanderbilt). Includes 
     functions to transform data to the necessary formats and to provide a quick
     overview of data.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
