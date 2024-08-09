@@ -183,6 +183,8 @@ aggRel <- function(data, rel) {
 #' @param draw_dist A boolean indicating whether to draw the distribution on the diagonal
 #' @param showN A boolean indicating whether to show the number of observations
 #' @param completedOnly A boolean indicating whether to only use complete cases
+#' @return A ggplot object
+#' @export
 #'
 corMatrixPlot <- function(
     data,
