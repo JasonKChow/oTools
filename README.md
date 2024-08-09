@@ -8,7 +8,7 @@ overview of data.
 # Installation
 
 ```r
-devtools::install_github("OPLabVanderbilt/oTools")
+devtools::install_github("OPLabVanderbilt/oTools", build_vignettes = TRUE)
 ```
 
 # Usage
