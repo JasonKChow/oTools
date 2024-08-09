@@ -115,3 +115,15 @@ corMatrixPlot(
   showN = TRUE
 )
 ```
+
+# makeParcels
+This function creates parcels from the long format data. 
+
+```{r, warning=FALSE}
+birdParcels <- makeParcels(
+  data = birdData,
+  trialNCol = "trialN",
+  nParcels = 3,
+  randomize = FALSE
+)
+```
