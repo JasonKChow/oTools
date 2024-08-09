@@ -1,0 +1,123 @@
+---
+title: "example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+# oTools
+Here is a brief overview of the package.
+
+# Installation
+This is how you install this package. 
+```{r}
+
+```
+
+# Setup and load some example data
+```{r setup, warning=FALSE}
+suppressMessages(devtools::load_all())
+suppressPackageStartupMessages(library(tidyverse))
+
+
+# Load some data
+birdData <- system.file("extdata", "birdData.csv", package = "oTools") |>
+  read.csv()
+greebData <- system.file("extdata", "greebData.csv", package = "oTools") |>
+  read.csv()
+ziggData <- system.file("extdata", "ziggData.csv", package = "oTools") |>
+  read.csv()
+
+birdSummary <- birdData |>
+  group_by(sbjID) |>
+  summarise(
+    Bird = mean(corr)
+  ) |>
+  rename(SbjID = sbjID)
+greebSummary <- greebData |>
+  group_by(SbjID) |>
+  summarise(
+    Greeb = mean(corr)
+  )
+ziggSummary <- ziggData |>
+  group_by(SbjID) |>
+  summarise(
+    Zigg = mean(corr)
+  )
+
+allSummary <- birdSummary |>
+  left_join(greebSummary, by = "SbjID") |>
+  left_join(ziggSummary, by = "SbjID")
+```
+
+# long2Matrix
+This function converts the long format to the wide matrix format.
+```{r, warning=FALSE, message=FALSE}
+birdMatrix <- long2Matrix(
+  birdData,
+  idCol = "sbjID",
+  corrCol = "corr",
+  trialNCol = "trialN",
+  summaryStats = TRUE
+)
+
+greebMatrix <- long2Matrix(
+  greebData,
+  idCol = "SbjID",
+  corrCol = "corr",
+  trialNCol = "trialN",
+  summaryStats = TRUE
+)
+
+ziggMatrix <- long2Matrix(
+  ziggData,
+  idCol = "SbjID",
+  corrCol = "corr",
+  trialNCol = "trialN",
+  summaryStats = TRUE
+)
+```
+
+# matrix2Rel
+This function calculates reliability given the matrix wide format produced by
+`long2Matrix`. Note that if you don't have the `summaryStats` argument set to 
+`TRUE`, this function will not work, but the equivalent results can be produced
+using `splitHalf(wideMatrix, check.keys = FALSE)`.
+
+```{r, warning=FALSE}
+birdRel <- matrix2Rel(birdMatrix)
+greebRel <- matrix2Rel(greebMatrix)
+ziggRel <- matrix2Rel(ziggMatrix)
+
+allRel <- c(birdRel$lambda2, greebRel$lambda2, ziggRel$lambda2)
+
+ziggRel
+```
+
+# aggRel
+This function calculates the aggregate reliability given a set of measures. 
+Notice that more than 2 measures can be used here.
+
+```{r, warning=FALSE}
+tmp <- allSummary |> select(-SbjID)
+aggRel(tmp, allRel)
+```
+
+# corMatrixPlot
+This function creates a pairs plot of the correlation matrix. Notice the format
+for lambda symbols.
+
+```{r, warning=FALSE, message=FALSE, fig.width=8, fig.height=8}
+lambda2 <- "\U03BB\U2082"
+
+corMatrixPlot(
+  data = allSummary |> select(-SbjID),
+  reliability = allRel,
+  nullInterval = c(-1, 0),
+  rscale = 1 / 3,
+  relSymbol = c(lambda2, lambda2, lambda2),
+  draw_dist = TRUE,
+  showN = TRUE
+)
+```

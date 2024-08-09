@@ -1,0 +1,29 @@
+Package: oTools
+Title: Analyze data from o tests and other similar tests from OPLab
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jason", "Chow", , "oTools@jasonc.how", role = c("aut", "cre"))
+Description: A set of functions useful for analyzing o tests and other similar 
+    tests created by OPLab (https://github.com/OPLabVanderbilt). Includes 
+    functions to transform data to the necessary formats and to provide a quick
+    overview of data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    rlang,
+    dplyr,
+    tibble,
+    psych,
+    GGally,
+    ggplot2,
+    stringr,
+    ggpp,
+    BayesFactor,
+    rstanarm,
+    stats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
